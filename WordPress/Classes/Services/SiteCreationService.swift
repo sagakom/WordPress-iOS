@@ -404,7 +404,7 @@ open class SiteCreationService: LocalCoreDataService {
 
         let accountService = AccountService(managedObjectContext: ContextManager.sharedInstance().mainContext)
         let api = accountService.defaultWordPressComAccount()?.wordPressComRestApi ??
-                  WordPressComRestApi(userAgent: WPUserAgent.wordPress())
+                  WordPressComRestApi.defaultApi(userAgent: WPUserAgent.wordPress())
 
         let remote = WordPressComServiceRemote(wordPressComRestApi: api)
         remote.validateWPComBlog(withUrl: params.siteUrl,

@@ -151,6 +151,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-wpcom-base-url http://localhost/"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-debugJetpackConnectionFlow"
             isEnabled = "NO">
          </CommandLineArgument>

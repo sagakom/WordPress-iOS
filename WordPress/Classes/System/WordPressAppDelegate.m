@@ -101,6 +101,7 @@ DDLogLevel ddLogLevel = DDLogLevelInfo;
     [self setupBackgroundRefresh:application];
     [self setupComponentsAppearance];
     [self disableAnimationsForUITests:application];
+    [self configureWordPressComApi];
 
     if ([Feature enabled:FeatureFlagQuickStartV2]) {
         [[PushNotificationsManager shared] deletePendingLocalNotifications];

@@ -109,6 +109,12 @@ extension WordPressAppDelegate {
 
         UniversalLinkRouter.shared.handle(url: url)
     }
+
+    @objc func configureWordPressComApi() {
+        if let baseUrl = UserDefaults.standard.string(forKey: "wpcom-base-url") {
+            Environment.replaceEnvironment(wordPressComApiBase: baseUrl)
+        }
+    }
 }
 
 // MARK: - UIAppearance
