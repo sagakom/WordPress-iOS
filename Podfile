@@ -8,6 +8,29 @@ workspace 'WordPress.xcworkspace'
 
 plugin 'cocoapods-repo-update'
 
+# Static Frameworks:
+# ============
+#
+# Make all pods that are not shared across multiple targets into static frameworks by overriding the static_framework? function to return true
+# Linking the shared frameworks statically would lead to duplicate symbols
+# A future version of CocoaPods may make this easier to do. See https://github.com/CocoaPods/CocoaPods/issues/7428
+pre_install do |installer|
+    static = []
+    dynamic = []
+    installer.pod_targets.each do |pod|
+        if pod.target_definitions.any? { |t| t.label == "Pods-WordPressComStatsiOS" }
+            dynamic << pod
+            next
+        end
+        static << pod
+        def pod.static_framework?;
+           true
+        end
+    end
+    puts "Static: #{static.inspect}"
+    puts "Dynamic: #{dynamic.inspect}"
+end
+
 ## Pods shared between all the targets
 ## ===================================
 ##
