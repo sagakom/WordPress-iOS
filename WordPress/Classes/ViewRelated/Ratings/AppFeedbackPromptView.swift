@@ -114,7 +114,7 @@ class AppFeedbackPromptView: UIView {
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -LayoutConstants.labelHorizontalPadding),
 
             // position the button stack view
-            bottomAnchor.constraint(greaterThanOrEqualTo: buttonStack.bottomAnchor, constant: LayoutConstants.basePadding),
+            bottomAnchor.constraint(equalTo: buttonStack.bottomAnchor, constant: LayoutConstants.basePadding),
             buttonStack.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             // make sure the primary/yes button is always at least as big as the cancel/no button
