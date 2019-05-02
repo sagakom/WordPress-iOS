@@ -110,7 +110,7 @@ class NoticePresenter: NSObject {
             }
 
             UIView.animate(withDuration: durationValue.doubleValue, animations: {
-                currentContainer.bottomConstraint?.constant = -self.currentOffsetForKeyboard
+                currentContainer.bottomConstraint?.constant = self.onscreenNoticeContainerBottomConstraintConstant()
                 self.view.layoutIfNeeded()
             })
         }
@@ -125,7 +125,7 @@ class NoticePresenter: NSObject {
             }
 
             UIView.animate(withDuration: durationValue.doubleValue, animations: {
-                currentContainer.bottomConstraint?.constant = -self.window.untouchableViewController.offsetOnscreen
+                currentContainer.bottomConstraint?.constant = self.onscreenNoticeContainerBottomConstraintConstant()
                 self.view.layoutIfNeeded()
             })
         }
@@ -287,7 +287,7 @@ class NoticePresenter: NSObject {
             }
 
             noticeContainer.noticeView.alpha = WPAlphaZero
-            noticeContainer.bottomConstraint?.constant = self.window.untouchableViewController.offsetOffscreen
+            noticeContainer.bottomConstraint?.constant = self.offscreenNoticeContainerBottomConstraintConstant()
 
             self.view.layoutIfNeeded()
         }
@@ -300,10 +300,18 @@ class NoticePresenter: NSObject {
             }
 
             noticeContainer.noticeView.alpha = WPAlphaFull
-            noticeContainer.bottomConstraint?.constant = -self.window.untouchableViewController.offsetOnscreen
+            noticeContainer.bottomConstraint?.constant = self.onscreenNoticeContainerBottomConstraintConstant()
 
             self.view.layoutIfNeeded()
         }
+    }
+
+    private func offscreenNoticeContainerBottomConstraintConstant() -> CGFloat {
+        return self.window.untouchableViewController.offsetOffscreen - currentOffsetForKeyboard
+    }
+
+    private func onscreenNoticeContainerBottomConstraintConstant() -> CGFloat {
+        return -self.window.untouchableViewController.offsetOnscreen - currentOffsetForKeyboard
     }
 
     private func animatePresentation(fromState: AnimationBlock,
